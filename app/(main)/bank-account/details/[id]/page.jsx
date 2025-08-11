@@ -26,6 +26,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { Pie, PieChart } from "recharts";
 import { Plus } from "lucide-react";
 import { Trash } from "lucide-react";
 
@@ -111,7 +112,7 @@ export default function BankDetailsPage() {
   };
 
   return (
-    <div className="bank-account-details container mx-auto md:max-w-5xl lg:max-w-7xl xl:max-w-full px-2 md:px-0 ">
+    <div className="bank-account-details container mx-auto md:max-w-5xl lg:max-w-7xl xl:max-w-full px-2 md:px-0 space-y-5">
       {/* Bank Details */}
       <section className="flex flex-wrap justify-between items-center pb-5 shadow-md rounded-lg p-4">
         <h1 className="text-xl md:text-2xl lg:text-3xl font-bold pb-5">
@@ -149,34 +150,60 @@ export default function BankDetailsPage() {
       </section>
 
       {/* Chart Section */}
-      <section className=" shadow-md rounded-lg p-4">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-lg font-semibold">Transactions Overview</h2>
-          <div className="flex gap-2">
-            {["daily", "weekly", "monthly"].map((f) => (
-              <Button
-                key={f}
-                variant={filter === f ? "default" : "outline"}
-                onClick={() => setFilter(f)}
-              >
-                {f.charAt(0).toUpperCase() + f.slice(1)}
-              </Button>
-            ))}
+      <section className=" shadow-md rounded-lg p-4 ">
+        {/* Chart Section */}
+        <section className="shadow-md rounded-lg p-4">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-lg font-semibold">Transactions Overview</h2>
+            <div className="flex gap-2">
+              {["daily", "weekly", "monthly"].map((f) => (
+                <Button
+                  key={f}
+                  variant={filter === f ? "default" : "outline"}
+                  onClick={() => setFilter(f)}
+                >
+                  {f.charAt(0).toUpperCase() + f.slice(1)}
+                </Button>
+              ))}
+            </div>
           </div>
-        </div>
-        <ResponsiveContainer width="100%" height={500}>
-          <BarChart data={chartData[filter]}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Bar dataKey="amount" fill="#4F46E5" radius={[4, 4, 0, 0]} />
-          </BarChart>
-        </ResponsiveContainer>
+
+          <section className="flex flex-col lg:flex-row gap-6">
+            {/* Bar Chart */}
+            <div className="w-full lg:w-2/3 h-[500px] shadow-xl rounded-2xl p-4 ">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={chartData[filter]}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Bar dataKey="amount" fill="#4F46E5" radius={[4, 4, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+
+            {/* Pie Chart */}
+            <div className="w-full lg:w-1/3 h-[500px] shadow-xl rounded-2xl p-4">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Tooltip />
+                  <Pie
+                    data={chartData[filter]}
+                    dataKey="amount"
+                    nameKey="name"
+                    outerRadius={150}
+                    fill="#4F46E5"
+                    label
+                  />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+          </section>
+        </section>
       </section>
 
       {/* Transactions Table */}
-      <section className=" shadow-md rounded-lg p-4">
+      <section className="pt-5 shadow-md rounded-lg p-4">
         <h2 className="text-lg font-semibold mb-4">Bank Transactions</h2>
         <Table>
           <TableHeader>
