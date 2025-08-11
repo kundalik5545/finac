@@ -3,6 +3,7 @@ import { Plus } from "lucide-react";
 import React from "react";
 import BankCard from "./_components/BankCard";
 import { BankTable } from "./_components/BankTable";
+import Link from "next/link";
 
 const BankAccountPage = async () => {
   const bankCard = [
@@ -55,8 +56,13 @@ const BankAccountPage = async () => {
         <h1 className="text-xl md:text-2xl lg:text-3xl font-bold ">
           Bank Account
         </h1>
-        <Button className="">
-          <Plus size="icon" /> Add
+        <Button className="flex">
+          <Link
+            href="/bank-account/add"
+            className="flex items-center justify-around"
+          >
+            <Plus size="icon" /> Add
+          </Link>
         </Button>
       </section>
 
