@@ -4,11 +4,11 @@ import { CreditCard, Banknote } from "lucide-react";
 
 export default function BankCard({ bankCard }) {
   return (
-    <div className="flex flex-wrap gap-5 justify-center transition-all duration-300 ease-in-out">
+    <div className="flex flex-wrap gap-5 justify-around transition-all duration-300 ease-in-out space-y-5">
       {bankCard?.map((account, i) => (
         <Card
           key={i}
-          className="w-96 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 transition-transform duration-300 hover:scale-105"
+          className="w-96 md:w-[430px] lg:w-[450px] rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 transition-transform duration-300 hover:scale-105"
         >
           <CardContent className="p-6 flex flex-col justify-between h-full">
             {/* Top: Bank Name + Icon */}

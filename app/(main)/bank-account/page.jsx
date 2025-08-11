@@ -51,7 +51,7 @@ const BankAccountPage = async () => {
   return (
     <div className="bank-account-page container mx-auto md:max-w-5xl lg:max-w-7xl xl:max-w-full px-2 md:px-0 ">
       {/* Heading Section */}
-      <section className="flex justify-between items-center">
+      <section className="flex justify-between items-center pb-5">
         <h1 className="text-xl md:text-2xl lg:text-3xl font-bold ">
           Bank Account
         </h1>
@@ -59,12 +59,17 @@ const BankAccountPage = async () => {
           <Plus size="icon" /> Add
         </Button>
       </section>
+
       {/* Card Section */}
       <section className="py-5">
         <BankCard bankCard={bankCard} />
       </section>
+
       {/* Table section */}
       <section className="py-5">
+        <h2 className="text-lg md:text-xl lg:text-2xl font-bold py-1">
+          Bank Accounts List
+        </h2>
         <BankTable bankCard={bankCard} />
       </section>
     </div>
